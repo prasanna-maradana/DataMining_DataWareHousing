@@ -1,0 +1,79 @@
+--star schema 
+--Roll UP
+SELECT 
+    {[Measures].[Time Spent]} ON COLUMNS,
+    NONEMPTY( [Dim User].[Profession].Members ) ON ROWS
+FROM [AI Tools Star];
+--Drill Down
+SELECT 
+    {[Measures].[Time Spent]} ON COLUMNS,
+    NONEMPTY( DESCENDANTS([Dim User].[Gender].Members, [Dim User].[Profession]) ) ON ROWS
+FROM [AI Tools Star];
+--pivot
+SELECT 
+    NONEMPTY( [Dim User].[Profession].Members ) ON COLUMNS,
+    {[Measures].[Time Spent]} ON ROWS
+FROM [AI Tools Star];
+--slice
+SELECT 
+    {[Measures].[Time Spent]} ON COLUMNS,
+    NONEMPTY( [Dim User].[Name].Members ) ON ROWS
+FROM [AI Tools Star]
+WHERE ( [Dim User].[Profession].[Data Scientist] );
+--snowflake schema
+--rollup
+SELECT 
+    {[Measures].[Time Spent]} ON COLUMNS,
+    [Dim User 1].[Profession].Children ON ROWS
+FROM [AI Tools Snow];
+--DrillDown 
+SELECT 
+    {[Measures].[Time Spent]} ON COLUMNS,
+    [Dim User 1].[Profession].Children * [Dim User 1].[Name].Children ON ROWS
+FROM [AI Tools Snow];
+--slice 
+SELECT 
+    {[Measures].[Time Spent]} ON COLUMNS,
+    [Dim User 1].[Name].Children ON ROWS
+FROM [AI Tools Snow]
+WHERE ([Dim User 1].[Profession].[Software Engineer]);
+--pivot
+SELECT 
+    {[Measures].[Time Spent]} ON COLUMNS,
+    NONEMPTYCROSSJOIN( 
+        [Dim Device 1].[Device Type].Children, 
+        [Dim Tool 1].[Tool Name].Children 
+    ) ON ROWS
+FROM [AI Tools Snow];
+--fact constellation
+--RollUp
+SELECT 
+    {[Measures].[Time Spent]} ON COLUMNS,  
+    [Dim Device 2].[Device Type].Children ON ROWS  
+FROM [AI Tools FactConstellation];
+--DrillDown
+SELECT 
+    {[Measures].[Time Spent]} ON COLUMNS,  
+    [Dim Device 2].[Device Id].Children ON ROWS  
+FROM [AI Tools FactConstellation];
+--slice
+SELECT 
+    {[Measures].[Time Spent]} ON COLUMNS,  
+    [Dim Device 2].[Device Type].Children ON ROWS  
+FROM [AI Tools FactConstellation]  
+WHERE ([Dim User 2].[Profession].[Data Scientist]);
+--pivot
+SELECT 
+    {[Measures].[Time Spent]} ON COLUMNS,  
+    [Dim Tool 2].[Tool Name].Children ON ROWS  
+FROM [AI Tools FactConstellation]  
+WHERE (  
+    [Dim User 2].[Profession].[Data Scientist],  
+    [Dim Device 2].[Device Type].[Laptop]  
+);
+
+
+
+
+
+
