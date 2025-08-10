@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35913.81 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D2ABAB84-BF74-430A-B69E-9DC6D40DDA17}") = "AITool project", "AITool project.dwproj", "{79041B57-077C-9A9B-DD9A-E68010A477B2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Development|Default = Development|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79041B57-077C-9A9B-DD9A-E68010A477B2}.Development|Default.ActiveCfg = Development
+		{79041B57-077C-9A9B-DD9A-E68010A477B2}.Development|Default.Build.0 = Development
+		{79041B57-077C-9A9B-DD9A-E68010A477B2}.Development|Default.Deploy.0 = Development
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C2EE88C1-50CE-422C-9363-419FCC089053}
+	EndGlobalSection
+EndGlobal
